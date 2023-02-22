@@ -5,11 +5,13 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Select,
   VStack
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../api";
+import parishList from "../utils/parish.json";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -18,7 +20,52 @@ function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showConfirmPassword, setShowConfirmPassword] = useState("");
+  // const [coordinates, setCoordinates] = useState({ lat: "", long: "" });
+  const [location, setLocation] = useState("");
   const navigate = useNavigate();
+
+  // function getLocation() {
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       setLocation(position.coords);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     },
+  //     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+  //   );
+  // }
+
+  // useEffect(() => {
+  //   getLocation();
+  // }, []);
+
+  // useEffect(() => {
+  //   const options = {
+  //     enableHighAccuracy: true,
+  //     timeout: 5000,
+  //     maximumAge: 0
+  //   };
+
+  //   function success(pos) {
+  //     const crd = pos.coords;
+
+  //     console.log("Your current position is:");
+  //     console.log(`Latitude : ${crd.latitude}`);
+  //     console.log(`Longitude: ${crd.longitude}`);
+  //     console.log(`More or less ${crd.accuracy} meters.`);
+
+  //     setCoordinates({ lat: crd.latitude, long: crd.longitude });
+
+  //     console.log(setCoordinates);
+  //   }
+
+  //   function error(err) {
+  //     console.warn(`ERROR(${err.code}): ${err.message}`);
+  //   }
+
+  //   navigator.geolocation.getCurrentPosition(success, error, options);
+  // }, []);
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);
@@ -44,14 +91,20 @@ function Signup() {
     setShowConfirmPassword(!showConfirmPassword);
   }
 
+  function handleParishChange(event) {
+    setLocation(event.target.value);
+  }
+
   async function handleSubmitForm(event) {
     event.preventDefault();
     try {
-      const response = await signup({ username, email, password });
+      const response = await signup({ username, email, password, location });
       if (response.data.message) {
         setUsername("");
         setEmail("");
         setPassword("");
+        setConfirmPassword("");
+        setLocation("");
       } else {
         navigate("/");
       }
@@ -114,6 +167,23 @@ function Signup() {
             </Button>
           </InputRightElement>
         </InputGroup>
+      </FormControl>
+
+      <FormControl id="location" isRequired>
+        <FormLabel>Parish</FormLabel>
+        <Select
+          placeholder="Select your location by parish"
+          value={location}
+          onChange={handleParishChange}
+        >
+          {parishList.map((parish, index) => {
+            return (
+              <option key={index} value={parish}>
+                {parish}
+              </option>
+            );
+          })}
+        </Select>
       </FormControl>
 
       <Button
