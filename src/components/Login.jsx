@@ -39,7 +39,7 @@ function Login() {
       localStorage.setItem("authToken", response.data);
       // Setting the logged user in the context
       authenticateUser();
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +47,7 @@ function Login() {
 
   return (
     <VStack spacing="5px">
-      <FormControl id="username" isRequired>
+      <FormControl id="username-login" isRequired>
         <FormLabel>Username</FormLabel>
         <Input
           type="text"
@@ -57,7 +57,7 @@ function Login() {
         />
       </FormControl>
 
-      <FormControl id="password" isRequired>
+      <FormControl id="password-login" isRequired>
         <FormLabel>Password</FormLabel>
         <InputGroup size="md">
           <Input
