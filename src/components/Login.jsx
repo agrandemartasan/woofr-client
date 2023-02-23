@@ -5,6 +5,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  useToast,
   VStack
 } from "@chakra-ui/react";
 import { useState, useContext } from "react";
@@ -18,6 +19,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { authenticateUser } = useContext(UserContext);
+  const toast = useToast();
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);
