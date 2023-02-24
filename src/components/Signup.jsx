@@ -99,7 +99,7 @@ function Signup() {
     event.preventDefault();
     try {
       const response = await signup({ username, email, password, location });
-      if (response.data.message) {
+      if (response.data.message !== "Success") {
         setUsername("");
         setEmail("");
         setPassword("");

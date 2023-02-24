@@ -1,118 +1,105 @@
 import NavBar from "../components/NavBar";
 import { useEffect, useState } from "react";
-import { getAllUsers } from "../api";
-import {
-  Badge,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  Image,
-  Stack,
-  Text,
-  useColorModeValue
-} from "@chakra-ui/react";
+import { getAllUsers, sendInvite, getFriends, unfriendUser } from "../api";
+import parishList from "../utils/parish.json";
 
-function FindFriends() {
+function FindFriends({ userId }) {
   const [allUsers, setAllUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [invitedUsers, setInvitedUsers] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [selectedParish, setSelectedParish] = useState("");
 
   useEffect(() => {
-    async function hangleGetAllUsers() {
+    async function handleGetAllUsers() {
       const response = await getAllUsers();
-      setAllUsers(response.data);
+      const userFriends = await getFriends(userId);
+      setAllUsers(response.data.filter((user) => user._id !== userId));
+      setFilteredUsers(response.data.filter((user) => user._id !== userId));
+      setFriends(userFriends);
     }
-    hangleGetAllUsers();
-  }, []);
+    handleGetAllUsers();
+  }, [userId]);
+
+  useEffect(() => {
+    if (selectedParish) {
+      const filteredData = allUsers.filter(
+        (user) => user.info.locationByParish === selectedParish
+      );
+      setFilteredUsers(filteredData);
+    } else {
+      setFilteredUsers(allUsers);
+    }
+  }, [selectedParish, allUsers]);
+
+  async function handleAddFriend(friendId) {
+    try {
+      await sendInvite({ fromUser: userId, toUser: friendId });
+      setInvitedUsers([...invitedUsers, friendId]);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleRemoveFriend(friendId) {
+    try {
+      await unfriendUser(userId, friendId);
+      setFriends(friends.filter((friend) => friend._id !== friendId));
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const isInvited = (userId) => {
+    return invitedUsers.includes(userId);
+  };
+
+  const isFriend = (userId) => {
+    return friends.some((friend) => friend._id === userId);
+  };
+
+  function handleParishChange(event) {
+    setSelectedParish(event.target.value);
+  }
 
   return (
-    <div>
+    <>
       <NavBar />
-      <h1>Search For Friends</h1>
-      <ul>
-        {allUsers.map((user) => {
-          return (
-            <Center py={6}>
-              <Stack
-                borderWidth="1px"
-                borderRadius="lg"
-                w={{ sm: "100%", md: "540px" }}
-                height={{ sm: "476px", md: "20rem" }}
-                direction={{ base: "column", md: "row" }}
-                bg={"white"}
-                boxShadow={"2xl"}
-                padding={4}
-              >
-                <Flex flex={1} bg="blue.200">
-                  <Image
-                    objectFit="cover"
-                    boxSize="100%"
-                    src={
-                      "https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                    }
-                  />
-                </Flex>
-                <Stack
-                  flex={1}
-                  flexDirection="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  p={1}
-                  pt={2}
-                >
-                  <Heading fontSize={"2xl"} fontFamily={"body"}>
-                    {user.username}
-                  </Heading>
-                  <Text fontWeight={600} color={"gray"} size="sm" mb={4}>
-                    {user.info.location}
-                  </Text>
-                  <Text textAlign={"center"} color={"gray"} px={3}>
-                    {user.bio}
-                  </Text>
+      <div>
+        <label htmlFor="parish-select">Filter by parish:</label>
+        <select
+          id="parish-select"
+          value={selectedParish}
+          onChange={handleParishChange}
+        >
+          <option value="">All</option>
+          {parishList.map((parish) => (
+            <option key={parish} value={parish}>
+              {parish}
+            </option>
+          ))}
+        </select>
 
-                  <Stack
-                    width={"100%"}
-                    mt={"2rem"}
-                    direction={"row"}
-                    padding={2}
-                    justifyContent={"space-between"}
-                    alignItems={"center"}
-                  >
-                    <Button
-                      flex={1}
-                      fontSize={"sm"}
-                      rounded={"full"}
-                      _focus={{
-                        bg: "gray.200"
-                      }}
-                    >
-                      View Profile
-                    </Button>
-                    <Button
-                      flex={1}
-                      fontSize={"sm"}
-                      rounded={"full"}
-                      bg={"blue.400"}
-                      color={"white"}
-                      boxShadow={
-                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                      }
-                      _hover={{
-                        bg: "blue.500"
-                      }}
-                      _focus={{
-                        bg: "blue.500"
-                      }}
-                    >
-                      Add As Friend
-                    </Button>
-                  </Stack>
-                </Stack>
-              </Stack>
-            </Center>
-          );
-        })}
-      </ul>
-    </div>
+        <ul>
+          {filteredUsers.map((user) => (
+            <li key={user._id}>
+              {user.username}
+              {isInvited(user._id) ? (
+                <span>Invite Sent</span>
+              ) : isFriend(user._id) ? (
+                <button onClick={() => handleRemoveFriend(user._id)}>
+                  Remove Friend
+                </button>
+              ) : (
+                <button onClick={() => handleAddFriend(user._id)}>
+                  Add Friend
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
 

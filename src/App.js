@@ -4,12 +4,14 @@ import FindFriends from "./pages/FindFriends";
 import Homepage from "./pages/Homepage";
 import WoofrProfile from "./pages/WoofrProfile";
 import IsPrivate from "./components/IsPrivate";
+import Login from "./components/Login";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<Login />} />
         <Route
           path="/find"
           element={
