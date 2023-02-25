@@ -21,8 +21,8 @@ export const sendInvite = (inviteData) => {
   return axios.post(`${BASE_URL}/invites`, inviteData);
 };
 
-export const getInvites = (userId) => {
-  return axios.get(`${BASE_URL}/invites/${userId}`);
+export const getInvites = (id) => {
+  return axios.get(`${BASE_URL}/invites/${id}`);
 };
 
 export const acceptInvite = (inviteId) => {
@@ -33,12 +33,12 @@ export const rejectInvite = (inviteId) => {
   return axios.put(`${BASE_URL}/invites/${inviteId}/reject`);
 };
 
-export const getFriends = (userId) => {
-  return axios.get(`${BASE_URL}/friends`);
+export const getFriends = (id) => {
+  return axios.get(`${BASE_URL}/${id}/friends`);
 };
 
-export const unfriendUser = (userId, friendId) => {
-  return axios.put(`${BASE_URL}/${userId}/unfriend`, { friendId });
+export const unfriendUser = (id, friendId) => {
+  return axios.put(`${BASE_URL}/${id}/unfriend`, { friendId });
 };
 
 export const login = (user) => {

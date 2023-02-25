@@ -1,24 +1,26 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context/user.context";
 import { getInvites, acceptInvite, rejectInvite } from "./api";
 
-function InviteList({ userId }) {
+function InviteList() {
+  const { loggedUser } = useContext(UserContext);
   const [invites, setInvites] = useState([]);
 
   useEffect(() => {
     const fetchInvites = async () => {
-      const inviteList = await getInvites(userId);
+      const inviteList = await getInvites(loggedUser);
       setInvites(inviteList);
     };
 
     fetchInvites();
-  }, [userId]);
+  }, [loggedUser]);
 
   async function handleAcceptInvite(inviteId) {
     try {
       await acceptInvite(inviteId);
       setInvites(invites.filter((invite) => invite._id !== inviteId));
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
@@ -27,7 +29,7 @@ function InviteList({ userId }) {
       await rejectInvite(inviteId);
       setInvites(invites.filter((invite) => invite._id !== inviteId));
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
