@@ -3,18 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/user.context";
 import { getAllUsers, sendInvite, getFriends, unfriendUser } from "../api";
 import parishList from "../utils/parish.json";
-import {
-  Heading,
-  Avatar,
-  Box,
-  Center,
-  Text,
-  Stack,
-  Button,
-  Link,
-  Badge,
-  useColorModeValue
-} from "@chakra-ui/react";
+import UserCard from "../components/UserCard";
 
 function FindFriends() {
   const { loggedUser } = useContext(UserContext);
@@ -28,20 +17,27 @@ function FindFriends() {
     setSelectedParish(event.target.value);
   }
 
-  const isInvited = (userId) => {
-    return invitedUsers.includes(userId);
-  };
+  function checkFriendshipStatus(userId) {
+    const isInvited = (userId) => {
+      return invitedUsers.includes(userId);
+    };
 
-  const isFriend = (userId) => {
-    return friends.some((friend) => friend._id === userId);
-  };
+    const isFriend = (userId) => {
+      return friends.some((friend) => friend._id === userId);
+    };
+
+    if (isInvited(userId)) return "InviteSent";
+    if (isFriend(userId)) return "RemoveFriend";
+
+    return "AddFriend";
+  }
 
   useEffect(() => {
     async function handleGetAllUsers() {
       const response = await getAllUsers();
       if (loggedUser) {
         const userFriends = await getFriends(loggedUser._id);
-        console.log(userFriends.data);
+
         setAllUsers(
           response.data.filter((foundUser) => loggedUser._id !== foundUser._id)
         );
@@ -98,40 +94,22 @@ function FindFriends() {
           ))}
         </select>
 
-        <Center py={6}>
-          <Box>
-            {friends.length &&
-              filteredUsers.length &&
-              filteredUsers.map((user) => (
-                <li key={user._id}>
-                  {user.username}
-                  {isInvited(user._id) ? (
-                    <span>Invite Sent</span>
-                  ) : isFriend(user._id) ? (
-                    <button onClick={() => handleRemoveFriend(user._id)}>
-                      Remove Friend
-                    </button>
-                  ) : (
-                    <button onClick={() => handleAddFriend(user._id)}>
-                      Add Friend
-                    </button>
-                  )}
-                </li>
-              ))}
-            {/* {filteredUsers.length ? (
-              filteredUsers.map((el) => {
-                return (
-                  <li key={el._id}>
-                    <h3>{el.username}</h3>
-                    <h4>{el.info.locationByParish}</h4>
-                  </li>
-                );
-              })
-            ) : (
-              <>Loading...</>
-            )} */}
-          </Box>
-        </Center>
+        {friends.length &&
+          filteredUsers.length &&
+          filteredUsers.map((user) => (
+            <>
+              <UserCard
+                userId={user._id}
+                username={user.username}
+                profilePicture={user.profilePicture}
+                location={user.info.locationByParish}
+                bio={user.info.bio}
+                friendshipStatus={checkFriendshipStatus(user._id)}
+                handleAddFriend={handleAddFriend}
+                handleRemoveFriend={handleRemoveFriend}
+              />
+            </>
+          ))}
       </div>
     </>
   );
