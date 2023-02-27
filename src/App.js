@@ -5,21 +5,15 @@ import Homepage from "./pages/Homepage";
 import WoofrProfile from "./pages/WoofrProfile";
 import IsPrivate from "./components/IsPrivate";
 import Auth from "./pages/Auth";
+import Landing from "./pages/Landing";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/auth" element={<Auth />} />
-        <Route
-          path="/find"
-          element={
-            <IsPrivate>
-              <FindFriends />
-            </IsPrivate>
-          }
-        />
+        <Route path="/find" element={<FindFriends />} />
         <Route
           path="/profile"
           element={

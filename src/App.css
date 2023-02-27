@@ -1,7 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Abel&family=Exo+2:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300&display=swap");
 
-.App {
-  min-height: 100vh;
-  display: flex;
-  background-color: rgb(254, 228, 141);
+* {
+  font-family: lato;
 }

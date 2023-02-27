@@ -42,7 +42,7 @@ export default function Nav() {
   //   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box bg={useColorModeValue("brand.100", "brand.200")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <Stack direction={"row"} spacing={7}>
             <Image boxSize="8%" objectFit="cover" src={Logo} alt="Woofr Logo" />
@@ -76,9 +76,10 @@ export default function Nav() {
                     </Center>
                     <br />
                     <MenuDivider />
-                    <MenuItem>Your Servers</MenuItem>
-                    <MenuItem>Account Settings</MenuItem>
-                    <MenuItem onClick={logout}>Logout</MenuItem>
+                    <MenuItem as="a" href="/profile">
+                      Account Details
+                    </MenuItem>
+                    <MenuItem onClick={() => logout()}>Logout</MenuItem>
                   </MenuList>
                 </Menu>
               )}

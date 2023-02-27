@@ -40,7 +40,7 @@ function Login() {
       console.log(response);
       localStorage.setItem("authToken", response.data);
       // Setting the logged user in the context
-      authenticateUser();
+      await authenticateUser();
       navigate("/profile");
     } catch (error) {
       console.log(error);
@@ -77,7 +77,7 @@ function Login() {
       </FormControl>
 
       <Button
-        colorScheme="yellow"
+        colorScheme="brand"
         w="100%"
         style={{ marginTop: 15 }}
         type="submit"
@@ -85,9 +85,6 @@ function Login() {
       >
         Login
       </Button>
-
-      <p>Don't have an account?</p>
-      <Link to="/signup">Sign Up</Link>
     </VStack>
   );
 }

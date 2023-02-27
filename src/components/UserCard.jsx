@@ -65,9 +65,9 @@ export default function UserCard({
           <Button
             onClick={
               friendshipStatus === "RemoveFriend"
-                ? handleRemoveFriend(userId)
+                ? () => handleRemoveFriend(userId)
                 : friendshipStatus === "AddFriend"
-                ? handleAddFriend(userId)
+                ? () => handleAddFriend(userId)
                 : null
             }
             flex={1}

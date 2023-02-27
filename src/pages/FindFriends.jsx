@@ -1,4 +1,4 @@
-import NavBar from "../components/NavBar";
+import Nav from "../components/NavBar";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/user.context";
 import { getAllUsers, sendInvite, getFriends, unfriendUser } from "../api";
@@ -78,7 +78,7 @@ function FindFriends() {
 
   return (
     <>
-      <NavBar />
+      <Nav />
       <div>
         <label htmlFor="parish-select">Filter by parish:</label>
         <select

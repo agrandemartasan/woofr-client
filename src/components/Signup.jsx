@@ -187,7 +187,7 @@ function Signup() {
       </FormControl>
 
       <Button
-        colorScheme="blue"
+        colorScheme="brand"
         w="100%"
         style={{ marginTop: 15 }}
         type="submit"
@@ -195,8 +195,6 @@ function Signup() {
       >
         Sign Up
       </Button>
-      <p>Already have an account?</p>
-      <Link to="/login">Login</Link>
     </VStack>
   );
 }
