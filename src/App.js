@@ -6,6 +6,7 @@ import WoofrProfile from "./pages/WoofrProfile";
 import IsPrivate from "./components/IsPrivate";
 import Auth from "./pages/Auth";
 import Landing from "./pages/Landing";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/find" element={<FindFriends />} />
+        <Route path="/edit" element={<EditProfile />} />
         <Route
           path="/profile"
           element={

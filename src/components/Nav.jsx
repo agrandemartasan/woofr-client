@@ -21,21 +21,6 @@ import { UserContext } from "../context/user.context";
 import { useContext } from "react";
 import Logo from "../utils/paw.png";
 
-const NavLink = ({ children }) => (
-  <Link
-    px={2}
-    py={4}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700")
-    }}
-    href={""}
-  >
-    {children}
-  </Link>
-);
-
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { loggedUser, logout } = useContext(UserContext);
@@ -46,7 +31,18 @@ export default function Nav() {
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <Stack direction={"row"} spacing={7}>
             <Image boxSize="8%" objectFit="cover" src={Logo} alt="Woofr Logo" />
-            <NavLink href={"/find"}>Find Friends</NavLink>
+            <Link
+              px={2}
+              py={4}
+              rounded={"md"}
+              _hover={{
+                textDecoration: "none",
+                bg: useColorModeValue("gray.200", "gray.700")
+              }}
+              href={"/find"}
+            >
+              Find Friends
+            </Link>
           </Stack>
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>

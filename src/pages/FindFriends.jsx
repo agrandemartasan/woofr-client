@@ -1,4 +1,4 @@
-import Nav from "../components/NavBar";
+import Nav from "../components/Nav";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/user.context";
 import { getAllUsers, sendInvite, getFriends, unfriendUser } from "../api";
@@ -38,10 +38,20 @@ function FindFriends() {
       if (loggedUser) {
         const userFriends = await getFriends(loggedUser._id);
 
-        setAllUsers(
-          response.data.filter((foundUser) => loggedUser._id !== foundUser._id)
-        );
-        setFriends(userFriends.data);
+        if (userFriends.length > 0) {
+          setAllUsers(
+            response.data.filter(
+              (foundUser) => loggedUser._id !== foundUser._id
+            )
+          );
+          setFriends(userFriends.data);
+        } else {
+          setAllUsers(
+            response.data.filter(
+              (foundUser) => loggedUser._id !== foundUser._id
+            )
+          );
+        }
       }
     }
     handleGetAllUsers();
@@ -94,8 +104,7 @@ function FindFriends() {
           ))}
         </select>
 
-        {friends.length &&
-          filteredUsers.length &&
+        {filteredUsers.length &&
           filteredUsers.map((user) => (
             <>
               <UserCard
