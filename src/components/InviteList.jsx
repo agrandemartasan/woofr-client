@@ -1,16 +1,17 @@
 import { useContext, useEffect, useState } from "react";
+import { acceptInvite, getInvitesReceived, rejectInvite } from "../api";
 import { UserContext } from "../context/user.context";
-import { getInvites, acceptInvite, rejectInvite } from "./api";
 
 function InviteList() {
   const { loggedUser } = useContext(UserContext);
   const [invites, setInvites] = useState([]);
 
   useEffect(() => {
-    const fetchInvites = async () => {
-      const inviteList = await getInvites(loggedUser);
-      setInvites(inviteList);
-    };
+    async function fetchInvites() {
+      const response = await getInvitesReceived(loggedUser._id);
+      console.log("response", response.data);
+      setInvites(response.data);
+    }
 
     fetchInvites();
   }, [loggedUser]);
@@ -37,17 +38,21 @@ function InviteList() {
     <div>
       <h2>Invites</h2>
       <ul>
-        {invites.map((invite) => (
-          <li key={invite._id}>
-            {invite.fromUser.name} wants to be your friend!
-            <button onClick={() => handleAcceptInvite(invite._id)}>
-              Accept
-            </button>
-            <button onClick={() => handleRejectInvite(invite._id)}>
-              Reject
-            </button>
-          </li>
-        ))}
+        {invites.length > 0 ? (
+          invites.map((invite) => (
+            <li key={invite._id}>
+              {invite.sender.username} wants to be your friend!
+              <button onClick={() => handleAcceptInvite(invite._id)}>
+                Accept
+              </button>
+              <button onClick={() => handleRejectInvite(invite._id)}>
+                Reject
+              </button>
+            </li>
+          ))
+        ) : (
+          <li>No invites yet.</li>
+        )}
       </ul>
     </div>
   );

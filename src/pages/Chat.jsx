@@ -1,5 +1,6 @@
 import Nav from "../components/Nav";
 import ChatList from "../components/ChatList";
+import ChatRoom from "../components/ChatRoom";
 
 function Chat() {
   return (
@@ -8,6 +9,7 @@ function Chat() {
       <div>
         Chat
         <ChatList />
+        {/* <ChatRoom /> */}
       </div>
     </>
   );

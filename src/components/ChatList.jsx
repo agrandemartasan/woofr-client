@@ -10,15 +10,17 @@ function ChatList() {
 
   useEffect(() => {
     async function fetchFriends() {
-      const response = await getFriends(loggedUser._id);
+      const response = await getFriends(loggedUser);
       setFriends(response.data);
     }
-    fetchFriends();
+    if (loggedUser) {
+      fetchFriends();
+    }
   }, [loggedUser]);
 
   async function handleCreateChat(recipientId) {
     const response = await createChat(loggedUser._id, recipientId);
-    navigate(`/chat/${response.data._id}`);
+    console.log("response", response.data);
   }
   return (
     <ul>

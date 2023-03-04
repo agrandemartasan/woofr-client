@@ -18,14 +18,7 @@ function App() {
         <Route path="/find" element={<FindFriends />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/edit" element={<EditProfile />} />
-        <Route
-          path="/profile"
-          element={
-            <IsPrivate>
-              <WoofrProfile />
-            </IsPrivate>
-          }
-        />
+        <Route path="/profile" element={<WoofrProfile />} />
       </Routes>
     </div>
   );

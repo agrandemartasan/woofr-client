@@ -10,6 +10,7 @@ import {
 } from "../api";
 import parishList from "../utils/parish.json";
 import UserCard from "../components/UserCard";
+import { Flex, FormLabel, Select } from "@chakra-ui/react";
 
 function FindFriends() {
   const { loggedUser } = useContext(UserContext);
@@ -73,27 +74,12 @@ function FindFriends() {
         console.log("userFriends", userFriends.data);
 
         const invitesSent = await getInvitesSent(loggedUser._id);
-        console.log("invitesSent", invitesSent.data);
-
         const filteredByStatus = invitesSent.data.filter(
           (item) => item.status === "pending"
         );
-        console.log("filteredByStatus", filteredByStatus);
-
         const pendingInvitesUsers = filteredByStatus.map((user) => {
           return user.recipient;
         });
-        console.log("pendingInvitesUsers", pendingInvitesUsers);
-
-        /*       if (invitedUsers.length > 0) {
-          setAllUsers(
-            response.data.filter(
-              (foundUser) => loggedUser._id !== foundUser._id
-            )
-          );
-
-
-        } */
 
         setInvitedUsers(pendingInvitesUsers);
 
@@ -123,33 +109,25 @@ function FindFriends() {
     } else {
       setFilteredUsers(allUsers);
     }
-    allUsers.forEach((user) => {
-      console.log("user", user);
-      console.log("friends", friends);
-      console.log("invitedUsers", invitedUsers);
-      // console.log("isFriend(user._id)", isFriend(user._id));
-      // console.log("isInvited(user._id)", isInvited(user._id));
-      console.log("checkFriendshipStatus", checkFriendshipStatus(user._id));
-    });
   }, [selectedParish, allUsers]);
 
   return (
     <>
       <Nav />
-      <div>
-        <label htmlFor="parish-select">Filter by parish:</label>
-        <select
+      <Flex w={"full"} minH={"91vh"} bg={"brand.400"} flexDirection={"column"}>
+        <FormLabel htmlFor="parish-select">Filter by parish:</FormLabel>
+        <Select
           id="parish-select"
           value={selectedParish}
           onChange={handleParishChange}
+          placeholder={"All"}
         >
-          <option value="">All</option>
           {parishList.map((parish, index) => (
             <option key={index} value={parish}>
               {parish}
             </option>
           ))}
-        </select>
+        </Select>
 
         {filteredUsers.length &&
           filteredUsers.map((user) => (
@@ -166,7 +144,7 @@ function FindFriends() {
               />
             </>
           ))}
-      </div>
+      </Flex>
     </>
   );
 }

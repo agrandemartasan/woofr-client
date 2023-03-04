@@ -44,10 +44,6 @@ function EditProfile() {
     setImage(event.target.files[0]);
   }
 
-  function handleBirthdayChange(event) {
-    setBirthday(event.target.value);
-  }
-
   useEffect(() => {
     async function handleGetUserDetails() {
       const response = await getUser(loggedUser._id);
@@ -68,6 +64,7 @@ function EditProfile() {
 
     if (loggedUser) {
       handleGetUserDetails();
+      console.log("loggedUser", loggedUser);
     }
   }, [loggedUser]);
 
