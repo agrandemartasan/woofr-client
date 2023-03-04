@@ -17,12 +17,19 @@ export const updateUser = (id, updatedUser) => {
   return axios.put(`${BASE_URL}/${id}`, updatedUser);
 };
 
-export const sendInvite = (inviteData) => {
-  return axios.post(`${BASE_URL}/invites`, inviteData);
+export const sendInvite = (senderId, recipientId) => {
+  return axios.post(`${BASE_URL}/invites`, {
+    sender: senderId,
+    recipient: recipientId
+  });
 };
 
-export const getInvites = (id) => {
-  return axios.get(`${BASE_URL}/invites/${id}`);
+export const getInvitesReceived = (userId) => {
+  return axios.get(`${BASE_URL}/invites/${userId}/invitesReceived`);
+};
+
+export const getInvitesSent = (userId) => {
+  return axios.get(`${BASE_URL}/invites/${userId}/invitesSent`);
 };
 
 export const acceptInvite = (inviteId) => {

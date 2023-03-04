@@ -27,12 +27,18 @@ export default function Nav() {
   //   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Box bg={useColorModeValue("brand.100", "brand.200")} px={4}>
+      <Box bg={useColorModeValue("brand.100", "brand.200")} px={5}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <Stack direction={"row"} spacing={7}>
-            <Image boxSize="8%" objectFit="cover" src={Logo} alt="Woofr Logo" />
+            <Image
+              boxSize="10%"
+              objectFit="cover"
+              src={Logo}
+              alt="Woofr Logo"
+              p={6}
+            />
             <Link
-              px={2}
+              p={2}
               py={4}
               rounded={"md"}
               _hover={{
@@ -42,6 +48,18 @@ export default function Nav() {
               href={"/find"}
             >
               Find Friends
+            </Link>
+            <Link
+              px={2}
+              py={4}
+              rounded={"md"}
+              _hover={{
+                textDecoration: "none",
+                bg: useColorModeValue("gray.200", "gray.700")
+              }}
+              href={"/chat"}
+            >
+              Chat With Your Friends
             </Link>
           </Stack>
           <Flex alignItems={"center"}>
