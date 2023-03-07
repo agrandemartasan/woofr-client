@@ -5,11 +5,10 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  useToast,
   VStack
 } from "@chakra-ui/react";
 import { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { login } from "../api";
 import { UserContext } from "../context/user.context";
 
@@ -19,7 +18,6 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { authenticateUser } = useContext(UserContext);
-  const toast = useToast();
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);
@@ -37,7 +35,6 @@ function Login() {
     event.preventDefault();
     try {
       const response = await login({ username, password });
-      console.log(response);
       localStorage.setItem("authToken", response.data);
       // Setting the logged user in the context
       await authenticateUser();

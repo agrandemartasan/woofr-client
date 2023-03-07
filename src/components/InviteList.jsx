@@ -12,8 +12,7 @@ function InviteList() {
       console.log("response", response.data);
       setInvites(response.data);
     }
-
-    fetchInvites();
+    if (loggedUser) fetchInvites();
   }, [loggedUser]);
 
   async function handleAcceptInvite(inviteId) {

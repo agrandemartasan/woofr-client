@@ -48,21 +48,17 @@ export const unfriendUser = (id, friendId) => {
   return axios.put(`${BASE_URL}/${id}/unfriend`, { friendId });
 };
 
-export const createChat = (userId, recipientId) => {
-  return axios.post(`${BASE_URL}/chats`, { userId, recipientId });
-};
-
-export const getUserChats = () => {
-  return axios.get(`${BASE_URL}/chats`);
+export const getUserChats = (userId) => {
+  return axios.get(`${BASE_URL}/${userId}/chats`);
 };
 
 export const getChatMessages = (chatId) => {
   return axios.get(`${BASE_URL}/chats/${chatId}/messages`);
 };
 
-export const postMessage = (chatId, senderId, content) => {
+export const postMessage = (chatId, sender, content) => {
   return axios.post(`${BASE_URL}/chats/${chatId}/messages`, {
-    senderId,
+    sender,
     content
   });
 };

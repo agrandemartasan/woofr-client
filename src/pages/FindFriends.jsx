@@ -30,8 +30,8 @@ function FindFriends() {
   }
 
   function checkFriendshipStatus(userId) {
-    console.log(userId);
-    debugger;
+    // console.log(userId);
+
     const isInvited = (userId) => {
       return invitedUsers.includes(userId);
     };
@@ -48,7 +48,11 @@ function FindFriends() {
 
   async function handleAddFriend(friendId) {
     try {
-      await sendInvite({ senderId: loggedUser, recipientId: friendId });
+      const newInvite = await sendInvite({
+        sender: loggedUser._id,
+        recipient: friendId
+      });
+      console.log("newInvite", newInvite);
       setInvitedUsers([...invitedUsers, friendId]);
     } catch (error) {
       console.log(error);
@@ -71,7 +75,7 @@ function FindFriends() {
       const response = await getAllUsers();
       if (loggedUser) {
         const userFriends = await getFriends(loggedUser._id);
-        console.log("userFriends", userFriends.data);
+        // console.log("userFriends", userFriends.data);
 
         const invitesSent = await getInvitesSent(loggedUser._id);
         const filteredByStatus = invitesSent.data.filter(

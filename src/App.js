@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import FindFriends from "./pages/FindFriends";
-import Homepage from "./pages/Homepage";
 import WoofrProfile from "./pages/WoofrProfile";
 import IsPrivate from "./components/IsPrivate";
 import Auth from "./pages/Auth";

@@ -1,42 +1,81 @@
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/user.context";
-import { createChat, getFriends } from "../api";
-import { useNavigate } from "react-router-dom";
+import { Box, Flex, Stack, Text } from "@chakra-ui/react";
+import LoadingChats from "./LoadingChats";
 
-function ChatList() {
-  const { loggedUser } = useContext(UserContext);
-  const [friends, setFriends] = useState([]);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    async function fetchFriends() {
-      const response = await getFriends(loggedUser);
-      setFriends(response.data);
-    }
-    if (loggedUser) {
-      fetchFriends();
-    }
-  }, [loggedUser]);
-
-  async function handleCreateChat(recipientId) {
-    const response = await createChat(loggedUser._id, recipientId);
-    console.log("response", response.data);
-  }
+function ChatList({ chats, activeChat, handleChangeActiveChat }) {
   return (
-    <ul>
-      {friends.length > 0 ? (
-        friends.map((friend) => (
-          <li key={friend._id}>
-            {friend.username}
-            <button onClick={() => handleCreateChat(friend._id)}>
-              New Chat
-            </button>
-          </li>
-        ))
-      ) : (
-        <li>No friends yet.</li>
-      )}
-    </ul>
+    <>
+      <Box
+        d={{ base: "flex", md: "none" }}
+        flexDir="column"
+        alignItems="center"
+        p={3}
+        bg="white"
+        w={{ base: "100%", md: "31%" }}
+        h="100%"
+        borderRadius="lg"
+        borderWidth="1px"
+      >
+        <Box
+          pb={3}
+          px={3}
+          fontSize={{ base: "28px", md: "30px" }}
+          d="flex"
+          w="100%"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          My Chats
+        </Box>
+
+        <Box
+          d="flex"
+          flexDir="column"
+          p={3}
+          bg="#F8F8F8"
+          w="100%"
+          h="100%"
+          borderRadius="lg"
+          overflowY="hidden"
+        >
+          {chats ? (
+            <Stack overflowY="scroll">
+              {chats.map((chat) => {
+                return (
+                  <Box
+                    onClick={() => handleChangeActiveChat(chat)}
+                    cursor="pointer"
+                    bg={
+                      activeChat && activeChat._id === chat._id
+                        ? "#38B2AC"
+                        : "#E8E8E8"
+                    }
+                    color={
+                      activeChat && activeChat._id === chat._id
+                        ? "white"
+                        : "black"
+                    }
+                    px={3}
+                    py={2}
+                    borderRadius="lg"
+                    key={chat._id}
+                  >
+                    <Text fontSize="lg"> {chat.users[0].username} </Text>
+                    {chat.latestMessage && (
+                      <Text fontSize="sm">
+                        {chat.latestMessage.sender.username} said:{" "}
+                        {chat.latestMessage.content}
+                      </Text>
+                    )}
+                  </Box>
+                );
+              })}
+            </Stack>
+          ) : (
+            <LoadingChats />
+          )}
+        </Box>
+      </Box>
+    </>
   );
 }
 
