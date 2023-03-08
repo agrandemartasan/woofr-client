@@ -5,8 +5,8 @@ import WoofrProfile from "./pages/WoofrProfile";
 import IsPrivate from "./components/IsPrivate";
 import Auth from "./pages/Auth";
 import Landing from "./pages/Landing";
-import EditProfile from "./pages/EditProfile";
 import Chat from "./pages/Chat";
+import Account from "./pages/Account";
 
 function App() {
   return (
@@ -16,8 +16,8 @@ function App() {
         <Route path="/auth" element={<Auth />} />
         <Route path="/find" element={<FindFriends />} />
         <Route path="/chat" element={<Chat />} />
-        <Route path="/edit" element={<EditProfile />} />
-        <Route path="/profile" element={<WoofrProfile />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/profile/:userId" element={<WoofrProfile />} />
       </Routes>
     </div>
   );

@@ -14,14 +14,12 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getUser, updateUser, uploadImage } from "../api";
-import Nav from "../components/Nav";
 import { UserContext } from "../context/user.context";
 import parishList from "../utils/parish.json";
 
 function EditProfile() {
   const { loggedUser } = useContext(UserContext);
   // TO DO: look into form management solution and/or reducer
-  //   const [userFormData, setUserFormData] = useState();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -104,8 +102,13 @@ function EditProfile() {
 
   return (
     <div>
-      <Nav />
-      <Flex w={"full"} minH={"91vh"} bg={"brand.400"}>
+      <Flex
+        w={"full"}
+        minH={"91vh"}
+        bg={"brand.400"}
+        borderRadius="lg"
+        borderWidth="1px"
+      >
         <Container maxW="70%" centerContent>
           <Box
             d="flex"

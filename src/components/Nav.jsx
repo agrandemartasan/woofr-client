@@ -85,7 +85,7 @@ export default function Nav() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem as="a" href="/profile">
+                  <MenuItem as="a" href="/account">
                     Account Details
                   </MenuItem>
                   <MenuItem onClick={() => logout()}>Logout</MenuItem>
