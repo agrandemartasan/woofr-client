@@ -145,7 +145,12 @@ function Signup() {
             onChange={handlePasswordChange}
           />
           <InputRightElement w="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleShowPassword}>
+            <Button
+              h="1.75rem"
+              size="sm"
+              colorScheme="brand"
+              onClick={handleShowPassword}
+            >
               {showPassword ? "Hide" : "Show"}
             </Button>
           </InputRightElement>
@@ -162,7 +167,12 @@ function Signup() {
             onChange={handleConfirmPasswordChange}
           />
           <InputRightElement w="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleShowConfirmPassword}>
+            <Button
+              h="1.75rem"
+              size="sm"
+              colorScheme="brand"
+              onClick={handleShowConfirmPassword}
+            >
               {showConfirmPassword ? "Hide" : "Show"}
             </Button>
           </InputRightElement>

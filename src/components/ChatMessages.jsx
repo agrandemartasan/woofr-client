@@ -1,7 +1,17 @@
 import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { postMessage } from "../api";
-import { Box } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  HStack,
+  Input,
+  useColorModeValue
+} from "@chakra-ui/react";
+import SingleMessage from "./SingleMessage";
 
 const ChatMessages = ({
   loggedUser,
@@ -37,45 +47,60 @@ const ChatMessages = ({
     }
   }, [chat]); */
 
-  if (!chat) {
-    return <div>Loading Messages</div>;
-  }
   return (
     <Box
       d={{ base: "flex", md: "flex" }}
       alignItems="center"
       flexDir="column"
       p={3}
-      bg="white"
+      bg={useColorModeValue("brand.50", "brand.600")}
+      color={useColorModeValue("brand.700", "brand.200")}
       w={{ base: "100%", md: "68%" }}
+      maxH="89.5vh"
       borderRadius="lg"
       borderWidth="1px"
     >
-      <div>
-        {messages.length === 0 ? (
-          <small>No messages yet.</small>
-        ) : (
-          messages.map((message) => (
-            <div key={message._id}>
-              <p>{message.content}</p>
-              <small>
-                {message.sender._id !== loggedUser._id
-                  ? message.sender.username
-                  : "You"}{" "}
-                • {formatDistanceToNow(new Date(message.createdAt))} ago
-              </small>
-            </div>
-          ))
-        )}
-      </div>
-      <form onSubmit={handleSubmitNewMessage}>
-        <input
-          type="text"
-          value={newMessage}
-          onChange={handleNewMessageChange}
-        />
-        <button type="submit">Send</button>
-      </form>
+      <Flex
+        maxH="70vh"
+        overflowY="scroll"
+        flexDirection="column-reverse"
+        mx={5}
+      >
+        <div>
+          {messages.length === 0 ? (
+            <small>No messages yet.</small>
+          ) : (
+            messages.map((message) => (
+              <>
+                {message.sender._id !== loggedUser._id ? (
+                  <SingleMessage message={message} sender="friend" />
+                ) : (
+                  <SingleMessage message={message} sender="user" />
+                )}
+              </>
+            ))
+          )}
+        </div>
+      </Flex>
+      <HStack bg="brand.400" mt={7} p={3} w="100%" borderRadius="lg">
+        <FormControl>
+          <Input
+            type="text"
+            value={newMessage}
+            onChange={handleNewMessageChange}
+            placeholder="Write your message..."
+          />
+        </FormControl>
+
+        <Button
+          colorScheme="brand"
+          w="25%"
+          type="submit"
+          onClick={handleSubmitNewMessage}
+        >
+          Send
+        </Button>
+      </HStack>
     </Box>
   );
 };

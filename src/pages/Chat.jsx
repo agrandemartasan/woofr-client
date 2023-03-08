@@ -4,7 +4,8 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/user.context";
 import { getChatMessages, getUserChats } from "../api";
 import ChatMessages from "../components/ChatMessages";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import EmptyChatMessages from "../components/EmptyChatMessages";
 
 function Chat() {
   const { loggedUser } = useContext(UserContext);
@@ -42,7 +43,14 @@ function Chat() {
   return (
     <>
       <Nav />
-      <Flex justifyContent="space-between" w="100%" h="100%" p="10px">
+      <Flex
+        justifyContent="space-between"
+        w="100%"
+        minH="91vh"
+        py={5}
+        px={5}
+        bg={useColorModeValue("brand.100", "brand.850")}
+      >
         <ChatList
           chats={chats}
           activeChat={activeChat}
@@ -59,22 +67,7 @@ function Chat() {
             activeChat={activeChat}
           />
         ) : (
-          <Box
-            d={{ base: "flex", md: "flex" }}
-            alignItems="center"
-            flexDir="column"
-            p={3}
-            bg="white"
-            w={{ base: "100%", md: "68%" }}
-            borderRadius="lg"
-            borderWidth="1px"
-          >
-            <Flex alignItems="center" justifyContent="center" h="100%">
-              <Text fontSize="3xl" pb={3}>
-                Click on one of your friends to chat
-              </Text>
-            </Flex>
-          </Box>
+          <EmptyChatMessages />
         )}
       </Flex>
     </>

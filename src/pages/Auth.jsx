@@ -27,7 +27,7 @@ function Auth() {
           d="flex"
           justifyContent="center"
           p={3}
-          bg="brand.400"
+          bg="brand.100"
           w="100%"
           m="40px 0 15px 0"
           borderRadius="lg"
@@ -37,7 +37,7 @@ function Auth() {
             Woofr
           </Text>
         </Box>
-        <Box bg="brand.400" w="100%" p={4} borderRadius="lg" borderWidth="1px">
+        <Box bg="brand.200" w="100%" p={4} borderRadius="lg" borderWidth="1px">
           <Tabs variant="soft-rounded" colorScheme="brand">
             <TabList mb="1em">
               <Tab w="50%">Login</Tab>

@@ -1,4 +1,4 @@
-import { Box, Flex, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import LoadingChats from "./LoadingChats";
 
 function ChatList({ chats, activeChat, handleChangeActiveChat }) {
@@ -9,7 +9,7 @@ function ChatList({ chats, activeChat, handleChangeActiveChat }) {
         flexDir="column"
         alignItems="center"
         p={3}
-        bg="white"
+        bg={useColorModeValue("brand.50", "brand.600")}
         w={{ base: "100%", md: "31%" }}
         h="100%"
         borderRadius="lg"
@@ -23,6 +23,7 @@ function ChatList({ chats, activeChat, handleChangeActiveChat }) {
           w="100%"
           justifyContent="space-between"
           alignItems="center"
+          color={useColorModeValue("brand.700", "brand.200")}
         >
           My Chats
         </Box>
@@ -31,7 +32,7 @@ function ChatList({ chats, activeChat, handleChangeActiveChat }) {
           d="flex"
           flexDir="column"
           p={3}
-          bg="#F8F8F8"
+          bg={useColorModeValue("brand.50", "brand.600")}
           w="100%"
           h="100%"
           borderRadius="lg"
@@ -46,13 +47,13 @@ function ChatList({ chats, activeChat, handleChangeActiveChat }) {
                     cursor="pointer"
                     bg={
                       activeChat && activeChat._id === chat._id
-                        ? "#38B2AC"
-                        : "#E8E8E8"
+                        ? "brand.700"
+                        : "brand.200"
                     }
                     color={
                       activeChat && activeChat._id === chat._id
-                        ? "white"
-                        : "black"
+                        ? "brand.50"
+                        : "brand.900"
                     }
                     px={3}
                     py={2}

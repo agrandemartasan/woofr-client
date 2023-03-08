@@ -20,11 +20,11 @@ export default function UserCard({
   handleRemoveFriend
 }) {
   return (
-    <Center py={6}>
+    <Center>
       <Box
         maxW={"320px"}
         w={"full"}
-        bg={useColorModeValue("white", "gray.900")}
+        bg={useColorModeValue("brand.50", "brand.600")}
         boxShadow={"2xl"}
         rounded={"lg"}
         p={6}
@@ -37,15 +37,23 @@ export default function UserCard({
           mb={4}
           pos={"relative"}
         />
-        <Heading fontSize={"2xl"} fontFamily={"body"}>
+        <Heading
+          fontSize={"2xl"}
+          fontFamily={"body"}
+          color={useColorModeValue("brand.900", "brand.50")}
+        >
           {username}
         </Heading>
-        <Text fontWeight={600} color={"gray.500"} mb={4}>
+        <Text
+          fontWeight={600}
+          color={useColorModeValue("brand.700", "brand.300")}
+          mb={4}
+        >
           {location}
         </Text>
         <Text
           textAlign={"center"}
-          color={useColorModeValue("gray.700", "gray.400")}
+          color={useColorModeValue("brand.700", "brand.400")}
           px={3}
         >
           {bio}
@@ -56,8 +64,13 @@ export default function UserCard({
             flex={1}
             fontSize={"sm"}
             rounded={"full"}
+            bg={"brand.400"}
+            color={"brand.50"}
+            _hover={{
+              bg: "brand.500"
+            }}
             _focus={{
-              bg: "gray.200"
+              bg: "brand.500"
             }}
           >
             View Profile
@@ -73,16 +86,13 @@ export default function UserCard({
             flex={1}
             fontSize={"sm"}
             rounded={"full"}
-            bg={"blue.400"}
-            color={"white"}
-            boxShadow={
-              "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-            }
+            bg={"brand.400"}
+            color={"brand.50"}
             _hover={{
-              bg: "blue.500"
+              bg: "brand.500"
             }}
             _focus={{
-              bg: "blue.500"
+              bg: "brand.500"
             }}
           >
             {friendshipStatus === "InviteSent" && "Invite Sent"}

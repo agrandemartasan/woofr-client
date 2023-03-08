@@ -66,7 +66,12 @@ function Login() {
             onChange={handlePasswordChange}
           />
           <InputRightElement w="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleShowPassword}>
+            <Button
+              h="1.75rem"
+              size="sm"
+              colorScheme="brand"
+              onClick={handleShowPassword}
+            >
               {showPassword ? "Hide" : "Show"}
             </Button>
           </InputRightElement>
