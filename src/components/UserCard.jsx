@@ -8,6 +8,7 @@ import {
   Button,
   useColorModeValue
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export default function UserCard({
   userId,
@@ -51,13 +52,6 @@ export default function UserCard({
         >
           {location}
         </Text>
-        <Text
-          textAlign={"center"}
-          color={useColorModeValue("brand.700", "brand.400")}
-          px={3}
-        >
-          {bio}
-        </Text>
 
         <Stack mt={8} direction={"row"} spacing={4}>
           <Button
@@ -73,7 +67,7 @@ export default function UserCard({
               bg: "brand.500"
             }}
           >
-            View Profile
+            <Link to={`/profile/${userId}`}>View Profile</Link>
           </Button>
           <Button
             onClick={

@@ -38,7 +38,7 @@ function Login() {
       localStorage.setItem("authToken", response.data);
       // Setting the logged user in the context
       await authenticateUser();
-      navigate("/profile");
+      navigate("/account");
     } catch (error) {
       console.log(error);
     }

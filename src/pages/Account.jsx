@@ -19,7 +19,6 @@ function Account() {
 
     if (loggedUser) {
       handleGetUserDetails();
-      console.log("loggedUser", loggedUser);
     }
   }, [loggedUser]);
   return (

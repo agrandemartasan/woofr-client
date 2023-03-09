@@ -9,7 +9,6 @@ function InviteList() {
   useEffect(() => {
     async function fetchInvites() {
       const response = await getInvitesReceived(loggedUser._id);
-      console.log("response", response.data);
       setInvites(response.data);
     }
     if (loggedUser) fetchInvites();

@@ -62,13 +62,8 @@ function EditProfile() {
 
     if (loggedUser) {
       handleGetUserDetails();
-      console.log("loggedUser", loggedUser);
     }
   }, [loggedUser]);
-
-  useEffect(() => {
-    console.log(username, email, birthday);
-  }, [username, email, birthday]);
 
   async function handleSubmitForm(event) {
     event.preventDefault();
@@ -78,13 +73,14 @@ function EditProfile() {
     let response;
     if (uploadData["filename"]) {
       response = await uploadImage(uploadData);
+      console.log("response", response);
     }
 
     await updateUser(loggedUser._id, {
       username,
       email,
       password,
-      profilePicture: response ? response.data.fileUrl : "",
+      profilePicture: response ? response.data.image : "",
       locationByParish: location,
       bio,
       birthday,
@@ -96,8 +92,7 @@ function EditProfile() {
       size
     });
 
-    toast.success("Profile successfully edited!");
-    navigate("/profile");
+    navigate("/find");
   }
 
   return (
