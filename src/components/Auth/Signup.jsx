@@ -10,9 +10,9 @@ import {
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signup } from "../api";
-import { UserContext } from "../context/user.context";
-import parishList from "../utils/parish.json";
+import { signup } from "../../api";
+import { UserContext } from "../../context/user.context";
+import parishList from "../../utils/parish.json";
 
 function Signup() {
   const [username, setUsername] = useState("");

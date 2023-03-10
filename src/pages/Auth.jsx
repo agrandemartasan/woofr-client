@@ -9,15 +9,15 @@ import {
   Tabs,
   Text
 } from "@chakra-ui/react";
-import Login from "../components/Login";
-import Signup from "../components/Signup";
 import DogHero from "../assets/1.jpg";
+import Login from "../components/Auth/Login";
+import Signup from "../components/Auth/Signup";
 
 function Auth() {
   return (
     <Flex
       w={"full"}
-      h={"fit-content"}
+      minH={"fit-content"}
       backgroundImage={DogHero}
       backgroundSize={"cover"}
       backgroundPosition={"center center"}

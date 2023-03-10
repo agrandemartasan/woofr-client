@@ -12,9 +12,9 @@ import {
   useColorModeValue
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
-import { getUser, updateUser, uploadImage } from "../api";
-import { UserContext } from "../context/user.context";
-import parishList from "../utils/parish.json";
+import { getUser, updateUser, uploadImage } from "../../api";
+import { UserContext } from "../../context/user.context";
+import parishList from "../../utils/parish.json";
 
 function EditProfile() {
   const { loggedUser } = useContext(UserContext);
@@ -246,7 +246,9 @@ function EditProfile() {
               <FormControl id="isNeuteredOrSpayed">
                 <FormLabel>Is the Dog Neutered/Spayed?</FormLabel>
                 <Checkbox
+                  colorScheme="brand"
                   borderColor={"brand.200"}
+                  isChecked={isNeuteredOrSpayed}
                   checked={isNeuteredOrSpayed}
                   onChange={(e) => setIsNeuteredOrSpayed(e.target.checked)}
                 />
@@ -255,7 +257,9 @@ function EditProfile() {
               <FormControl id="isVaccinated">
                 <FormLabel>Is the Dog Vaccinated?</FormLabel>
                 <Checkbox
+                  colorScheme="brand"
                   borderColor={"brand.200"}
+                  isChecked={isVaccinated}
                   checked={isVaccinated}
                   onChange={(e) => setIsVaccinated(e.target.checked)}
                 />
@@ -264,8 +268,9 @@ function EditProfile() {
               <FormControl id="isTrained">
                 <FormLabel>Is the Dog Trained?</FormLabel>
                 <Checkbox
-                  colorScheme="pink"
+                  colorScheme="brand"
                   borderColor={"brand.200"}
+                  isChecked={isTrained}
                   checked={isTrained}
                   onChange={(e) => setIsTrained(e.target.checked)}
                 />

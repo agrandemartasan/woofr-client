@@ -1,15 +1,3 @@
-import Nav from "../components/Nav";
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/user.context";
-import {
-  getAllUsers,
-  sendInvite,
-  getFriends,
-  unfriendUser,
-  getInvitesSent
-} from "../api";
-import parishList from "../utils/parish.json";
-import UserCard from "../components/UserCard";
 import {
   Box,
   Flex,
@@ -17,6 +5,18 @@ import {
   Select,
   useColorModeValue
 } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
+import {
+  getAllUsers,
+  getFriends,
+  getInvitesSent,
+  sendInvite,
+  unfriendUser
+} from "../api";
+import UserCard from "../components/FindFriends/UserCard";
+import Nav from "../components/Nav";
+import { UserContext } from "../context/user.context";
+import parishList from "../utils/parish.json";
 
 function FindFriends() {
   const { loggedUser } = useContext(UserContext);
@@ -155,7 +155,13 @@ function FindFriends() {
             ))}
           </Select>
         </Box>
-        <Flex justifyContent="flex-start" gap={2} w="100%" h="100%">
+        <Flex
+          justifyContent="flex-start"
+          flexWrap="wrap"
+          gap={2}
+          w="100%"
+          h="100%"
+        >
           {filteredUsers.length &&
             filteredUsers.map((user) => (
               <>

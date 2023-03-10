@@ -1,4 +1,4 @@
-import DogHero from "../assets/3.jpg";
+import DogHero from "../../assets/3.jpg";
 import { NavLink as RouterLink } from "react-router-dom";
 import {
   Button,

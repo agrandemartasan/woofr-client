@@ -1,11 +1,11 @@
-import Nav from "../components/Nav";
-import ChatList from "../components/ChatList";
+import { Flex, useColorModeValue } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/user.context";
 import { getChatMessages, getUserChats } from "../api";
-import ChatMessages from "../components/ChatMessages";
-import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
-import EmptyChatMessages from "../components/EmptyChatMessages";
+import ChatList from "../components/Chat/ChatList";
+import ChatMessages from "../components/Chat/ChatMessages";
+import EmptyChatMessages from "../components/Chat/EmptyChatMessages";
+import Nav from "../components/Nav";
+import { UserContext } from "../context/user.context";
 
 function Chat() {
   const { loggedUser } = useContext(UserContext);

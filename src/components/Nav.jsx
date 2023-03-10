@@ -19,7 +19,7 @@ import {
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { UserContext } from "../context/user.context";
 import { useContext } from "react";
-import Logo from "../utils/paw.png";
+import Logo from "../assets/paw2.png";
 
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -28,30 +28,34 @@ export default function Nav() {
   return (
     <Box bg={useColorModeValue("brand.200", "brand.900")} px={5}>
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-        <Stack direction={"row"} spacing={7}>
+        <Stack direction={"row"} spacing={2}>
           <Image
             boxSize="8%"
             objectFit="cover"
             src={Logo}
             alt="Woofr Logo"
-            p={2}
+            mr={6}
           />
           <Link
-            pt={5}
+            pt={2}
+            px={4}
             rounded={"md"}
             href={"/find"}
             _hover={{
-              bg: "brand.500"
+              bg: "brand.500",
+              color: "brand.50"
             }}
           >
             Find Friends
           </Link>
           <Link
-            pt={5}
+            pt={2}
+            px={4}
             rounded={"md"}
             href={"/chat"}
             _hover={{
-              bg: "brand.500"
+              bg: "brand.500",
+              color: "brand.50"
             }}
           >
             Chat With Your Friends

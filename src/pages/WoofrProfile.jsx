@@ -1,7 +1,3 @@
-import Nav from "../components/Nav";
-import { useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { getUser } from "../api";
 import {
   Box,
   Button,
@@ -13,6 +9,10 @@ import {
   useColorModeValue
 } from "@chakra-ui/react";
 import { formatDistanceToNow } from "date-fns";
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getUser } from "../api";
+import Nav from "../components/Nav";
 import { UserContext } from "../context/user.context";
 
 function WoofrProfile() {

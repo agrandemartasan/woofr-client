@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { acceptInvite, getInvitesReceived, rejectInvite } from "../api";
-import { UserContext } from "../context/user.context";
+import { acceptInvite, getInvitesReceived, rejectInvite } from "../../api";
+import { UserContext } from "../../context/user.context";
 import { Box, Button, Text, useColorModeValue } from "@chakra-ui/react";
 
 function InviteList() {

@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import Hero from "../components/Hero";
+import Hero from "../components/Landing/Hero";
 
 function Landing() {
   return (

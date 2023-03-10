@@ -1,6 +1,6 @@
-import Nav from "../components/Nav";
-import InviteList from "../components/InviteList";
-import EditProfile from "../components/EditProfile";
+import NavBar from "../components/NavBar";
+import InviteList from "../components/Account/InviteList";
+import EditProfile from "../components/Account/EditProfile";
 import { Box, Flex, Image, useColorModeValue } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/user.context";
@@ -25,7 +25,7 @@ function Account() {
   }, [loggedUser]);
   return (
     <>
-      <Nav />
+      <NavBar />
 
       <Flex
         alignItems="flex-start"
