@@ -37,6 +37,7 @@ function WoofrProfile() {
       setLocation(response.data.info.locationByParish);
       setBio(response.data.info.bio);
       setBirthday(response.data.info.birthday);
+      debugger;
       setGender(response.data.info.gender);
       setBreed(response.data.info.breed);
       setIsNeuteredOrSpayed(response.data.info.isNeuteredOrSpayed);
@@ -106,7 +107,10 @@ function WoofrProfile() {
             borderWidth="1px"
           >
             <Text>I'm from {location}</Text>
-            <Text>{bio}</Text>
+            <Text>
+              I was born {formatDistanceToNow(new Date(birthday))} ago
+            </Text>
+            <Text>About me: {bio}</Text>
           </Box>
           <Box
             m={"auto"}
@@ -117,11 +121,8 @@ function WoofrProfile() {
             borderRadius="lg"
             borderWidth="1px"
           >
-            <Text>
-              I was born {formatDistanceToNow(new Date(birthday))} ago
-            </Text>
-            <Text>I'm {gender}</Text>
-            <Text>I'm a {breed}</Text>
+            <Text>My gender is: {gender}</Text>
+            <Text>My breed is: {breed}</Text>
             <Text>My size is: {size}</Text>
           </Box>
           <HStack

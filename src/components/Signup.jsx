@@ -8,9 +8,10 @@ import {
   Select,
   VStack
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../api";
+import { UserContext } from "../context/user.context";
 import parishList from "../utils/parish.json";
 
 function Signup() {
@@ -23,6 +24,7 @@ function Signup() {
   // const [coordinates, setCoordinates] = useState({ lat: "", long: "" });
   const [location, setLocation] = useState("");
   const navigate = useNavigate();
+  const { authenticateUser } = useContext(UserContext);
 
   // function getLocation() {
   //   navigator.geolocation.getCurrentPosition(
@@ -106,7 +108,10 @@ function Signup() {
         setConfirmPassword("");
         setLocation("");
       } else {
-        navigate("/");
+        localStorage.setItem("authToken", response.data.authToken);
+        // Setting the logged user in the context
+        await authenticateUser();
+        navigate("/account");
       }
     } catch (error) {
       console.log(error);
