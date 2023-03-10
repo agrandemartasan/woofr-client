@@ -8,11 +8,10 @@ import {
   FormLabel,
   Input,
   Select,
-  Text
+  Text,
+  useColorModeValue
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { getUser, updateUser, uploadImage } from "../api";
 import { UserContext } from "../context/user.context";
 import parishList from "../utils/parish.json";
@@ -98,152 +97,152 @@ function EditProfile() {
   }
 
   return (
-    <div>
-      <Flex
-        w={"full"}
-        minH={"91vh"}
-        bg={"brand.400"}
-        borderRadius="lg"
-        borderWidth="1px"
-      >
-        <Container maxW="70%" centerContent>
+    <Flex
+      w={"100%"}
+      minH={"fit-content"}
+      bg={useColorModeValue("brand.50", "brand.600")}
+      color={useColorModeValue("brand.900", "brand.50")}
+      borderRadius="lg"
+      borderWidth="1px"
+      pb={3}
+    >
+      <Container maxW="100%" centerContent>
+        <Box
+          d="flex"
+          justifyContent="center"
+          p={2}
+          bg="brand.300"
+          w="100%"
+          my={2}
+          borderRadius="lg"
+          borderWidth="1px"
+        >
+          <Text fontSize="2xl" color="brand.50" textAlign="center">
+            Edit your profile
+          </Text>
+        </Box>
+        <Flex gap={3} flexDirection={{ base: "column", md: "row" }}>
           <Box
-            d="flex"
-            justifyContent="center"
-            p={3}
-            bg="brand.300"
             w="100%"
-            m="40px 0 15px 0"
+            p={4}
             borderRadius="lg"
             borderWidth="1px"
+            borderColor={"brand.200"}
           >
-            <Text fontSize="4xl" color="white" textAlign="center">
-              Edit Your Profile Here
-            </Text>
+            <FormControl id="username" pb={3}>
+              <FormLabel>Username</FormLabel>
+              <Input
+                borderColor={"brand.200"}
+                type="text"
+                name="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </FormControl>
+
+            <FormControl id="email" pb={3}>
+              <FormLabel>Email</FormLabel>
+              <Input
+                borderColor={"brand.200"}
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </FormControl>
+
+            <FormControl id="password" pb={3}>
+              <FormLabel>Password</FormLabel>
+              <Input
+                borderColor={"brand.200"}
+                type="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </FormControl>
+
+            <FormControl id="image" pb={3}>
+              <FormLabel>Profile Picture</FormLabel>
+              <Input
+                borderColor={"brand.200"}
+                type="file"
+                name="image"
+                onChange={handleImageSelect}
+              />
+            </FormControl>
+
+            <FormControl id="location" pb={3}>
+              <FormLabel>Location</FormLabel>
+              <Select
+                borderColor={"brand.200"}
+                name="locationByParish"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              >
+                {parishList.map((parish) => (
+                  <option key={parish} value={parish}>
+                    {parish}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl id="birthday" pb={3}>
+              <FormLabel>Birthday</FormLabel>
+              <Input
+                type="date"
+                name="birthday"
+                value={birthday}
+                onChange={(e) => setBirthday(e.target.value)}
+              />
+            </FormControl>
           </Box>
-          <Flex>
-            <Box
-              bg="brand.400"
-              w="100%"
-              p={4}
-              borderRadius="lg"
-              borderWidth="1px"
-              borderColor={"brand.200"}
-            >
-              <FormControl id="username">
-                <FormLabel>Username</FormLabel>
-                <Input
-                  borderColor={"brand.200"}
-                  type="text"
-                  name="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </FormControl>
 
-              <FormControl id="email">
-                <FormLabel>Email</FormLabel>
-                <Input
-                  borderColor={"brand.200"}
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </FormControl>
+          <Box
+            w="100%"
+            p={4}
+            borderRadius="lg"
+            borderWidth="1px"
+            borderColor={"brand.200"}
+          >
+            <FormControl id="bio" pb={3}>
+              <FormLabel>Bio</FormLabel>
+              <Input
+                borderColor={"brand.200"}
+                type="text"
+                name="bio"
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+              />
+            </FormControl>
 
-              <FormControl id="password">
-                <FormLabel>Password</FormLabel>
-                <Input
-                  borderColor={"brand.200"}
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </FormControl>
+            <FormControl id="gender" pb={3}>
+              <FormLabel>Gender</FormLabel>
+              <Select
+                borderColor={"brand.200"}
+                name="gender"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <option>Unspecified</option>
+                <option>Female</option>
+                <option>Male</option>
+              </Select>
+            </FormControl>
 
-              <FormControl id="image">
-                <FormLabel>Profile Picture</FormLabel>
-                <Input
-                  borderColor={"brand.200"}
-                  type="file"
-                  name="image"
-                  onChange={handleImageSelect}
-                />
-              </FormControl>
+            <FormControl id="breed" pb={3}>
+              <FormLabel>Breed</FormLabel>
+              <Input
+                borderColor={"brand.200"}
+                type="text"
+                name="breed"
+                value={breed}
+                onChange={(e) => setBreed(e.target.value)}
+              />
+            </FormControl>
 
-              <FormControl>
-                <FormLabel htmlFor="location">Location</FormLabel>
-                <Select
-                  borderColor={"brand.200"}
-                  name="locationByParish"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                >
-                  {parishList.map((parish) => (
-                    <option key={parish} value={parish}>
-                      {parish}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
-
-              <FormControl id="bio">
-                <FormLabel>Bio</FormLabel>
-                <Input
-                  borderColor={"brand.200"}
-                  type="text"
-                  name="bio"
-                  value={bio}
-                  onChange={(e) => setBio(e.target.value)}
-                />
-              </FormControl>
-
-              <FormControl id="birthday">
-                <FormLabel>Birthday</FormLabel>
-                <Input
-                  type="date"
-                  name="birthday"
-                  value={birthday}
-                  onChange={(e) => setBirthday(e.target.value)}
-                />
-              </FormControl>
-            </Box>
-
-            <Box
-              bg="brand.400"
-              w="100%"
-              p={4}
-              borderRadius="lg"
-              borderWidth="1px"
-              borderColor={"brand.200"}
-            >
-              <FormControl id="gender">
-                <FormLabel>Gender</FormLabel>
-                <Select
-                  borderColor={"brand.200"}
-                  name="gender"
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                >
-                  <option>Unspecified</option>
-                  <option>Female</option>
-                  <option>Male</option>
-                </Select>
-              </FormControl>
-
-              <FormControl id="breed">
-                <FormLabel>Breed</FormLabel>
-                <Input
-                  borderColor={"brand.200"}
-                  type="text"
-                  name="breed"
-                  value={breed}
-                  onChange={(e) => setBreed(e.target.value)}
-                />
-              </FormControl>
-
+            <Flex pb={3}>
               <FormControl id="isNeuteredOrSpayed">
                 <FormLabel>Is the Dog Neutered/Spayed?</FormLabel>
                 <Checkbox
@@ -271,37 +270,37 @@ function EditProfile() {
                   onChange={(e) => setIsTrained(e.target.checked)}
                 />
               </FormControl>
+            </Flex>
 
-              <FormControl id="size">
-                <FormLabel>Size</FormLabel>
-                <Select
-                  borderColor={"brand.200"}
-                  name="size"
-                  value={size}
-                  onChange={(e) => setSize(e.target.value)}
-                >
-                  <option>Unspecified</option>
-                  <option>Small (Up to 14 kg)</option>
-                  <option>Medium (Between 14-28kg)</option>
-                  <option>Large (Between 28–42kg)</option>
-                  <option>Extra Large (Over 42kgs)</option>
-                </Select>
-              </FormControl>
-
-              <Button
-                colorScheme="brand"
-                w="50%"
-                style={{ marginTop: 15 }}
-                type="submit"
-                onClick={handleSubmitForm}
+            <FormControl id="size" pb={3}>
+              <FormLabel>Size</FormLabel>
+              <Select
+                borderColor={"brand.200"}
+                name="size"
+                value={size}
+                onChange={(e) => setSize(e.target.value)}
               >
-                Save Changes
-              </Button>
-            </Box>
-          </Flex>
-        </Container>
-      </Flex>
-    </div>
+                <option>Unspecified</option>
+                <option>Small (Up to 14 kg)</option>
+                <option>Medium (Between 14-28kg)</option>
+                <option>Large (Between 28–42kg)</option>
+                <option>Extra Large (Over 42kgs)</option>
+              </Select>
+            </FormControl>
+
+            <Button
+              colorScheme="brand"
+              w="50%"
+              style={{ marginTop: 15 }}
+              type="submit"
+              onClick={handleSubmitForm}
+            >
+              Save Changes
+            </Button>
+          </Box>
+        </Flex>
+      </Container>
+    </Flex>
   );
 }
 
