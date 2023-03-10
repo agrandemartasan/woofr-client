@@ -15,7 +15,6 @@ import { formatDistanceToNow } from "date-fns";
 
 function WoofrProfile() {
   const { userId } = useParams();
-  const [user, setUser] = useState(null);
   const [username, setUsername] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
   const [location, setLocation] = useState("");

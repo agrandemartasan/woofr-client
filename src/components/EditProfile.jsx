@@ -35,8 +35,7 @@ function EditProfile() {
   const [isVaccinated, setIsVaccinated] = useState(false);
   const [isTrained, setIsTrained] = useState(false);
   const [size, setSize] = useState("");
-
-  const navigate = useNavigate();
+  const [currentProfilePicture, setCurrentProfilePicture] = useState("");
 
   function handleImageSelect(event) {
     setImage(event.target.files[0]);
@@ -58,6 +57,7 @@ function EditProfile() {
       setIsVaccinated(response.data.info.isVaccinated);
       setIsTrained(response.data.info.isTrained);
       setSize(response.data.info.size);
+      setCurrentProfilePicture(response.data.profilePicture);
     }
 
     if (loggedUser) {
@@ -68,19 +68,21 @@ function EditProfile() {
   async function handleSubmitForm(event) {
     event.preventDefault();
 
-    const uploadData = new FormData();
-    uploadData.append("filename", image);
-    let response;
-    if (uploadData["filename"]) {
-      response = await uploadImage(uploadData);
-      console.log("response", response);
+    let uploadedImage;
+
+    if (image !== currentProfilePicture) {
+      const uploadData = new FormData();
+      uploadData.append("filename", image);
+      uploadedImage = await uploadImage(uploadData);
     }
 
     await updateUser(loggedUser._id, {
       username,
       email,
       password,
-      profilePicture: response ? response.data.image : "",
+      profilePicture: uploadedImage
+        ? uploadedImage.data.fileUrl
+        : currentProfilePicture,
       locationByParish: location,
       bio,
       birthday,
@@ -92,7 +94,7 @@ function EditProfile() {
       size
     });
 
-    navigate("/find");
+    window.location.reload();
   }
 
   return (
