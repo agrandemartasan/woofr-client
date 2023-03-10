@@ -121,7 +121,7 @@ function Signup() {
   return (
     <VStack spacing="5px">
       <FormControl id="username" isRequired>
-        <FormLabel>Username</FormLabel>
+        <FormLabel>Your Dog's Name (this will be your username!)</FormLabel>
         <Input
           type="text"
           placeholder="Enter Your Username"

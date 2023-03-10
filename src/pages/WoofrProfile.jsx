@@ -1,9 +1,10 @@
 import Nav from "../components/Nav";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getUser } from "../api";
 import {
   Box,
+  Button,
   Flex,
   HStack,
   Image,
@@ -12,8 +13,10 @@ import {
   useColorModeValue
 } from "@chakra-ui/react";
 import { formatDistanceToNow } from "date-fns";
+import { UserContext } from "../context/user.context";
 
 function WoofrProfile() {
+  const { loggedUser } = useContext(UserContext);
   const { userId } = useParams();
   const [username, setUsername] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
@@ -52,6 +55,7 @@ function WoofrProfile() {
   return (
     <>
       <Nav />
+      {loggedUser._id !== userId && <Button>Add Friend</Button>}
       <Flex
         flexDirection={{ base: "column", md: "row" }}
         alignItems="flex-start"
