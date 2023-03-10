@@ -5,7 +5,7 @@ function ChatList({ chats, activeChat, handleChangeActiveChat }) {
   return (
     <>
       <Box
-        d={{ base: "flex", md: "none" }}
+        d="flex"
         flexDir="column"
         alignItems="center"
         p={3}

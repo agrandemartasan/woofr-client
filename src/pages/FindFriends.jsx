@@ -125,7 +125,8 @@ function FindFriends() {
     <>
       <Nav />
       <Flex
-        alignItems="flex-start"
+        alignItems={{ base: "center", md: "flex-start" }}
+        flexDir={{ base: "column", md: "row" }}
         gap={6}
         w="100%"
         minH="91vh"
@@ -136,7 +137,7 @@ function FindFriends() {
         <Box
           p={3}
           bg={useColorModeValue("brand.50", "brand.600")}
-          w="31%"
+          w={{ base: "100%", md: "31%" }}
           h="100%"
           borderRadius="lg"
           borderWidth="1px"
@@ -156,7 +157,7 @@ function FindFriends() {
           </Select>
         </Box>
         <Flex
-          justifyContent="flex-start"
+          justifyContent={{ base: "center", md: "flex-start" }}
           flexWrap="wrap"
           gap={2}
           w="100%"

@@ -1,33 +1,43 @@
 import {
-  Box,
-  Flex,
-  Text,
-  IconButton,
-  Button,
-  Stack,
-  Collapse,
-  Icon,
-  Link,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  useColorModeValue,
-  useBreakpointValue,
-  useDisclosure,
-  useColorMode
-} from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  CloseIcon,
   ChevronDownIcon,
   ChevronRightIcon,
+  CloseIcon,
+  HamburgerIcon,
   MoonIcon,
   SunIcon
 } from "@chakra-ui/icons";
+import {
+  Avatar,
+  Box,
+  Button,
+  Center,
+  Collapse,
+  Flex,
+  Icon,
+  IconButton,
+  Link,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Stack,
+  Text,
+  useBreakpointValue,
+  useColorMode,
+  useColorModeValue,
+  useDisclosure
+} from "@chakra-ui/react";
+import { useContext } from "react";
+import { UserContext } from "../context/user.context";
 
 export default function WithSubnavigation() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onToggle } = useDisclosure();
+  const { loggedUser, logout } = useContext(UserContext);
 
   return (
     <Box>
@@ -80,6 +90,43 @@ export default function WithSubnavigation() {
           <Button onClick={toggleColorMode}>
             {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
           </Button>
+          <Menu>
+            <MenuButton
+              as={Button}
+              rounded={"full"}
+              variant={"link"}
+              cursor={"pointer"}
+              minW={0}
+            >
+              <Avatar size={"sm"} /* src={loggedUser.profilePicture} */ />
+            </MenuButton>
+            <MenuList
+              bg={useColorModeValue("brand.200", "brand.900")}
+              alignItems={"center"}
+            >
+              <br />
+              <Center>
+                <Avatar size={"2xl"} /* src={loggedUser.profilePicture}  */ />
+              </Center>
+              <br />
+              <Center>{/* <p>{loggedUser.username}</p> */}</Center>
+              <br />
+              <MenuDivider />
+              <MenuItem
+                as="a"
+                href="/account"
+                bg={useColorModeValue("brand.200", "brand.900")}
+              >
+                Account Details
+              </MenuItem>
+              <MenuItem
+                bg={useColorModeValue("brand.200", "brand.900")}
+                onClick={() => logout()}
+              >
+                Logout
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </Stack>
       </Flex>
 
@@ -91,9 +138,9 @@ export default function WithSubnavigation() {
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("gray.800", "white");
-  const popoverContentBgColor = useColorModeValue("white", "gray.800");
+  const linkColor = useColorModeValue("brand.600", "brand.200");
+  const linkHoverColor = useColorModeValue("brand.800", "brand.300");
+  const popoverContentBgColor = useColorModeValue("brand.50", "brand.800");
 
   return (
     <Stack direction={"row"} spacing={4}>
@@ -147,13 +194,13 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       display={"block"}
       p={2}
       rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
+      _hover={{ bg: useColorModeValue("brand.50", "brand.900") }}
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
           <Text
             transition={"all .3s ease"}
-            _groupHover={{ color: "pink.400" }}
+            _groupHover={{ color: "brand.400" }}
             fontWeight={500}
           >
             {label}
@@ -169,7 +216,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           align={"center"}
           flex={1}
         >
-          <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={"brand.400"} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
@@ -179,7 +226,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 const MobileNav = () => {
   return (
     <Stack
-      bg={useColorModeValue("white", "gray.800")}
+      bg={useColorModeValue("brand.50", "brand.800")}
       p={4}
       display={{ md: "none" }}
     >
@@ -207,7 +254,7 @@ const MobileNavItem = ({ label, children, href }) => {
       >
         <Text
           fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
+          color={useColorModeValue("brand.900", "brand.50")}
         >
           {label}
         </Text>
@@ -228,7 +275,7 @@ const MobileNavItem = ({ label, children, href }) => {
           pl={4}
           borderLeft={1}
           borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
+          borderColor={useColorModeValue("brand.200", "brand.700")}
           align={"start"}
         >
           {children &&

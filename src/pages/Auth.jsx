@@ -17,7 +17,8 @@ function Auth() {
   return (
     <Flex
       w={"full"}
-      minH={"fit-content"}
+      h={"fit-content"}
+      minH={"100vh"}
       backgroundImage={DogHero}
       backgroundSize={"cover"}
       backgroundPosition={"center center"}
