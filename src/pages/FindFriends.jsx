@@ -1,10 +1,3 @@
-import {
-  Box,
-  Flex,
-  FormLabel,
-  Select,
-  useColorModeValue
-} from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import {
   getAllUsers,
@@ -13,10 +6,10 @@ import {
   sendInvite,
   unfriendUser
 } from "../api";
-import UserCard from "../components/FindFriends/UserCard";
-import Nav from "../components/Nav";
+import FriendsSection from "../components/FindFriends/FriendsSection";
+import Loading from "../components/Loading/Loading";
+import NavBar from "../components/NavBar";
 import { UserContext } from "../context/user.context";
-import parishList from "../utils/parish.json";
 
 function FindFriends() {
   const { loggedUser } = useContext(UserContext);
@@ -36,8 +29,6 @@ function FindFriends() {
   }
 
   function checkFriendshipStatus(userId) {
-    // console.log(userId);
-
     const isInvited = (userId) => {
       return invitedUsers.includes(userId);
     };
@@ -81,7 +72,6 @@ function FindFriends() {
       const response = await getAllUsers();
       if (loggedUser) {
         const userFriends = await getFriends(loggedUser._id);
-        // console.log("userFriends", userFriends.data);
 
         const invitesSent = await getInvitesSent(loggedUser._id);
         const filteredByStatus = invitesSent.data.filter(
@@ -121,65 +111,24 @@ function FindFriends() {
     }
   }, [selectedParish, allUsers]);
 
+  if (!loggedUser || !filteredUsers || !allUsers || !friends || !invitedUsers)
+    return <Loading />;
   return (
     <>
-      <Nav />
-      <Flex
-        alignItems={{ base: "center", md: "flex-start" }}
-        flexDir={{ base: "column", md: "row" }}
-        gap={6}
-        w="100%"
-        minH="91vh"
-        py={5}
-        px={5}
-        bg={useColorModeValue("brand.100", "brand.850")}
-      >
-        <Box
-          p={3}
-          bg={useColorModeValue("brand.50", "brand.600")}
-          w={{ base: "100%", md: "31%" }}
-          h="100%"
-          borderRadius="lg"
-          borderWidth="1px"
-        >
-          <FormLabel htmlFor="parish-select">Filter by parish:</FormLabel>
-          <Select
-            id="parish-select"
-            value={selectedParish}
-            onChange={handleParishChange}
-            placeholder={"All"}
-          >
-            {parishList.map((parish, index) => (
-              <option key={index} value={parish}>
-                {parish}
-              </option>
-            ))}
-          </Select>
-        </Box>
-        <Flex
-          justifyContent={{ base: "center", md: "flex-start" }}
-          flexWrap="wrap"
-          gap={2}
-          w="100%"
-          h="100%"
-        >
-          {filteredUsers.length &&
-            filteredUsers.map((user) => (
-              <>
-                <UserCard
-                  userId={user._id}
-                  username={user.username}
-                  profilePicture={user.profilePicture}
-                  location={user.info.locationByParish}
-                  bio={user.info.bio}
-                  friendshipStatus={checkFriendshipStatus(user._id)}
-                  handleAddFriend={handleAddFriend}
-                  handleRemoveFriend={handleRemoveFriend}
-                />
-              </>
-            ))}
-        </Flex>
-      </Flex>
+      <NavBar />
+      <FriendsSection
+        loggedUser={loggedUser}
+        allUsers={allUsers}
+        filteredUsers={filteredUsers}
+        invitedUsers={invitedUsers}
+        friends={friends}
+        selectedParish={selectedParish}
+        filterUsersByParish={filterUsersByParish}
+        handleParishChange={handleParishChange}
+        checkFriendshipStatus={checkFriendshipStatus}
+        handleAddFriend={handleAddFriend}
+        handleRemoveFriend={handleRemoveFriend}
+      />
     </>
   );
 }

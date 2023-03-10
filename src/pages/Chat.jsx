@@ -4,7 +4,7 @@ import { getChatMessages, getUserChats } from "../api";
 import ChatList from "../components/Chat/ChatList";
 import ChatMessages from "../components/Chat/ChatMessages";
 import EmptyChatMessages from "../components/Chat/EmptyChatMessages";
-import Nav from "../components/Nav";
+import NavBar from "../components/NavBar";
 import { UserContext } from "../context/user.context";
 
 function Chat() {
@@ -42,7 +42,7 @@ function Chat() {
 
   return (
     <>
-      <Nav />
+      <NavBar />
       <Flex
         justifyContent="space-between"
         w="100%"
