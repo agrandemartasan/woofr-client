@@ -25,8 +25,6 @@ function Account() {
   }, [loggedUser]);
   return (
     <>
-      <NavBar />
-
       <Flex
         alignItems="flex-start"
         flexDirection={{ base: "column", md: "row" }}
