@@ -31,13 +31,28 @@ import {
   useColorModeValue,
   useDisclosure
 } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { getUser } from "../api";
 import { UserContext } from "../context/user.context";
 
 export default function WithSubnavigation() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onToggle } = useDisclosure();
   const { loggedUser, logout } = useContext(UserContext);
+  const [username, setUsername] = useState();
+  const [profilePicture, setProfilePicture] = useState("");
+
+  useEffect(() => {
+    async function handleGetUserDetails() {
+      const response = await getUser(loggedUser._id);
+      setUsername(response.data.username);
+      setProfilePicture(response.data.profilePicture);
+    }
+
+    if (loggedUser) {
+      handleGetUserDetails();
+    }
+  }, [loggedUser]);
 
   return (
     <Box>
@@ -98,7 +113,7 @@ export default function WithSubnavigation() {
               cursor={"pointer"}
               minW={0}
             >
-              <Avatar size={"sm"} /* src={loggedUser.profilePicture} */ />
+              <Avatar size={"sm"} src={profilePicture} />
             </MenuButton>
             <MenuList
               bg={useColorModeValue("brand.200", "brand.900")}
@@ -106,10 +121,10 @@ export default function WithSubnavigation() {
             >
               <br />
               <Center>
-                <Avatar size={"2xl"} /* src={loggedUser.profilePicture}  */ />
+                <Avatar size={"2xl"} src={profilePicture} />
               </Center>
               <br />
-              <Center>{/* <p>{loggedUser.username}</p> */}</Center>
+              <Center>{<p>{username}</p>}</Center>
               <br />
               <MenuDivider />
               <MenuItem

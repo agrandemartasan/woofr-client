@@ -6,6 +6,7 @@ import Chat from "./pages/Chat";
 import FindFriends from "./pages/FindFriends";
 import Landing from "./pages/Landing";
 import WoofrProfile from "./pages/WoofrProfile";
+import IsPrivate from "./components/Auth/IsPrivate";
 
 function App() {
   return (
@@ -13,10 +14,38 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/find" element={<FindFriends />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/profile/:userId" element={<WoofrProfile />} />
+        <Route
+          path="/find"
+          element={
+            <IsPrivate>
+              <FindFriends />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/chat"
+          element={
+            <IsPrivate>
+              <Chat />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/account"
+          element={
+            <IsPrivate>
+              <Account />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/profile/:userId"
+          element={
+            <IsPrivate>
+              <WoofrProfile />
+            </IsPrivate>
+          }
+        />
       </Routes>
     </div>
   );

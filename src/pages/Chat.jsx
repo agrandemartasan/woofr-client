@@ -48,7 +48,7 @@ function Chat() {
         justifyContent="flex-start"
         gap={3}
         w="100%"
-        minH="91vh"
+        minH="92vh"
         py={5}
         px={5}
         bg={useColorModeValue("brand.100", "brand.850")}

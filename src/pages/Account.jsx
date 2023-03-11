@@ -31,7 +31,7 @@ function Account() {
         alignItems="flex-start"
         flexDirection={{ base: "column", md: "row" }}
         w="100%"
-        minH="91vh"
+        minH="92vh"
         gap={3}
         py={5}
         px={5}
