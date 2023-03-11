@@ -54,7 +54,7 @@ function WoofrProfile() {
   }
   async function handleAddFriend(friendId) {
     try {
-      const newInvite = await sendInvite({
+      await sendInvite({
         sender: loggedUser._id,
         recipient: friendId
       });
@@ -93,7 +93,6 @@ function WoofrProfile() {
       if (loggedUser) {
         const loggedUserResponse = await getUser(loggedUser._id);
         setLoggedUserData(loggedUserResponse.data);
-        console.log("loggedUserResponse.data", loggedUserResponse.data);
       }
     }
 

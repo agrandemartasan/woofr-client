@@ -44,11 +44,10 @@ function FindFriends() {
 
   async function handleAddFriend(friendId) {
     try {
-      const newInvite = await sendInvite({
+      await sendInvite({
         sender: loggedUser._id,
         recipient: friendId
       });
-      console.log("newInvite", newInvite);
       setInvitedUsers([...invitedUsers, friendId]);
     } catch (error) {
       console.log(error);
