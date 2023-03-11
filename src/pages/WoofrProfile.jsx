@@ -38,7 +38,9 @@ function WoofrProfile() {
   function checkFriendshipStatus(userId) {
     //Todo: check for invites from other users
     const isInvited = (userId) => {
-      return loggedUserData.invitesSent?.includes(userId);
+      return loggedUserData.invitesSent?.some(
+        (user) => user.recipient === userId
+      );
     };
 
     const isFriend = (userId) => {
@@ -118,7 +120,7 @@ function WoofrProfile() {
           px={"5%"}
           bg={useColorModeValue("brand.100", "brand.850")}
         >
-          {userFriendshipStatus && (
+          {loggedUser && loggedUser._id !== userId && userFriendshipStatus && (
             <Button
               onClick={
                 userFriendshipStatus === "RemoveFriend"
