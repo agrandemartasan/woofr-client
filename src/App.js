@@ -14,11 +14,38 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/find" element={<FindFriends />} />
-        <Route path="/find" element={<isPrivate />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/profile/:userId" element={<WoofrProfile />} />
+        <Route
+          path="/find"
+          element={
+            <IsPrivate>
+              <FindFriends />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/chat"
+          element={
+            <IsPrivate>
+              <Chat />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/account"
+          element={
+            <IsPrivate>
+              <Account />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/profile/:userId"
+          element={
+            <IsPrivate>
+              <WoofrProfile />
+            </IsPrivate>
+          }
+        />
       </Routes>
     </div>
   );

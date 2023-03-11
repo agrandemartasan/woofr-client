@@ -4,7 +4,6 @@ import { getChatMessages, getUserChats } from "../api";
 import ChatList from "../components/Chat/ChatList";
 import ChatMessages from "../components/Chat/ChatMessages";
 import EmptyChatMessages from "../components/Chat/EmptyChatMessages";
-import NavBar from "../components/NavBar";
 import { UserContext } from "../context/user.context";
 
 function Chat() {
@@ -42,7 +41,6 @@ function Chat() {
 
   return (
     <>
-      <NavBar />
       <Flex
         flexDir={{ base: "column", md: "row" }}
         justifyContent="flex-start"

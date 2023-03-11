@@ -12,7 +12,6 @@ import { formatDistanceToNow } from "date-fns";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getUser } from "../api";
-import NavBar from "../components/NavBar";
 import { UserContext } from "../context/user.context";
 
 function WoofrProfile() {
@@ -53,7 +52,6 @@ function WoofrProfile() {
 
   return (
     <>
-      <NavBar />
       {loggedUser._id !== userId && <Button>Add Friend</Button>}
       <Flex
         flexDirection={{ base: "column", md: "row" }}

@@ -8,7 +8,6 @@ import {
 } from "../api";
 import FriendsSection from "../components/FindFriends/FriendsSection";
 import Loading from "../components/Loading/Loading";
-import NavBar from "../components/NavBar";
 import { UserContext } from "../context/user.context";
 
 function FindFriends() {
@@ -115,7 +114,6 @@ function FindFriends() {
     return <Loading />;
   return (
     <>
-      <NavBar />
       <FriendsSection
         filteredUsers={filteredUsers}
         selectedParish={selectedParish}

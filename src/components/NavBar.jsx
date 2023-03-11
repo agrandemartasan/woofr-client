@@ -35,7 +35,7 @@ import { useContext, useEffect, useState } from "react";
 import { getUser } from "../api";
 import { UserContext } from "../context/user.context";
 
-export default function WithSubnavigation() {
+export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onToggle } = useDisclosure();
   const { loggedUser, logout } = useContext(UserContext);
