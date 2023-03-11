@@ -9,7 +9,7 @@ import {
   VStack
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signup } from "../../api";
 import { UserContext } from "../../context/user.context";
 import parishList from "../../utils/parish.json";
@@ -21,53 +21,9 @@ function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showConfirmPassword, setShowConfirmPassword] = useState("");
-  // const [coordinates, setCoordinates] = useState({ lat: "", long: "" });
   const [location, setLocation] = useState("");
   const navigate = useNavigate();
   const { authenticateUser } = useContext(UserContext);
-
-  // function getLocation() {
-  //   navigator.geolocation.getCurrentPosition(
-  //     (position) => {
-  //       setLocation(position.coords);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     },
-  //     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-  //   );
-  // }
-
-  // useEffect(() => {
-  //   getLocation();
-  // }, []);
-
-  // useEffect(() => {
-  //   const options = {
-  //     enableHighAccuracy: true,
-  //     timeout: 5000,
-  //     maximumAge: 0
-  //   };
-
-  //   function success(pos) {
-  //     const crd = pos.coords;
-
-  //     console.log("Your current position is:");
-  //     console.log(`Latitude : ${crd.latitude}`);
-  //     console.log(`Longitude: ${crd.longitude}`);
-  //     console.log(`More or less ${crd.accuracy} meters.`);
-
-  //     setCoordinates({ lat: crd.latitude, long: crd.longitude });
-
-  //     console.log(setCoordinates);
-  //   }
-
-  //   function error(err) {
-  //     console.warn(`ERROR(${err.code}): ${err.message}`);
-  //   }
-
-  //   navigator.geolocation.getCurrentPosition(success, error, options);
-  // }, []);
 
   function handleUsernameChange(event) {
     setUsername(event.target.value);
@@ -109,7 +65,6 @@ function Signup() {
         setLocation("");
       } else {
         localStorage.setItem("authToken", response.data.authToken);
-        // Setting the logged user in the context
         await authenticateUser();
         navigate("/account");
       }

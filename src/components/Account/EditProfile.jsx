@@ -18,7 +18,6 @@ import parishList from "../../utils/parish.json";
 
 function EditProfile() {
   const { loggedUser } = useContext(UserContext);
-  // TO DO: look into form management solution and/or reducer
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { formatDistanceToNow } from "date-fns";
 import { postMessage } from "../../api";
 import {
   Box,
   Button,
   Flex,
   FormControl,
-  FormLabel,
   HStack,
   Input,
   useColorModeValue
@@ -18,8 +16,7 @@ const ChatMessages = ({
   chat,
   messages,
   setMessages,
-  setLatestMessage,
-  activeChat
+  setLatestMessage
 }) => {
   const [newMessage, setNewMessage] = useState("");
 
@@ -32,7 +29,6 @@ const ChatMessages = ({
 
     try {
       const response = await postMessage(chat._id, loggedUser._id, newMessage);
-      console.log("response", response);
       setMessages([...messages, response.data]);
       setLatestMessage(response.data.content);
       setNewMessage("");
@@ -41,27 +37,23 @@ const ChatMessages = ({
     }
   }
 
-  /* useEffect(() => {
-    if (chat) {
-      console.log("chat.messages", chat.messages);
-    }
-  }, [chat]); */
-
   return (
     <Box
-      d={{ base: "flex", md: "flex" }}
+      d="flex"
       alignItems="center"
       flexDir="column"
+      flexGrow={1}
       p={3}
       bg={useColorModeValue("brand.50", "brand.600")}
       color={useColorModeValue("brand.700", "brand.200")}
       w={{ base: "100%", md: "68%" }}
-      maxH="89.5vh"
+      minH="89vh"
       borderRadius="lg"
       borderWidth="1px"
     >
       <Flex
         maxH="70vh"
+        h="100%"
         overflowY="scroll"
         flexDirection="column-reverse"
         mx={5}

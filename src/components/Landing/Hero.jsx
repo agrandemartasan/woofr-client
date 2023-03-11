@@ -11,7 +11,7 @@ import {
 
 export default function Hero() {
   return (
-    <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
+    <Stack minH={"100vh"} direction={{ base: "column-reverse", md: "row" }}>
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
         <Stack spacing={6} w={"full"} maxW={"lg"}>
           <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
@@ -60,6 +60,7 @@ export default function Hero() {
         flex={1}
         backgroundImage={DogHero}
         backgroundPosition="center"
+        backgroundSize="cover"
         backgroundRepeat="no-repeat"
       ></Flex>
     </Stack>

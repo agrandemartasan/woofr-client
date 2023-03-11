@@ -1,8 +1,6 @@
 import {
   Heading,
   Avatar,
-  Box,
-  Center,
   Text,
   Stack,
   Button,
@@ -16,7 +14,6 @@ export default function UserCard({
   username,
   profilePicture,
   location,
-  bio,
   friendshipStatus,
   handleAddFriend,
   handleRemoveFriend

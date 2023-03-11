@@ -44,7 +44,9 @@ function Chat() {
     <>
       <NavBar />
       <Flex
-        justifyContent="space-between"
+        flexDir={{ base: "column", md: "row" }}
+        justifyContent="flex-start"
+        gap={3}
         w="100%"
         minH="91vh"
         py={5}
@@ -64,7 +66,6 @@ function Chat() {
             messages={messages}
             setMessages={setMessages}
             setLatestMessage={setLatestMessage}
-            activeChat={activeChat}
           />
         ) : (
           <EmptyChatMessages />

@@ -38,7 +38,14 @@ function Auth() {
             Woofr
           </Text>
         </Box>
-        <Box bg="brand.200" w="100%" p={4} borderRadius="lg" borderWidth="1px">
+        <Box
+          bg="brand.200"
+          w="100%"
+          p={4}
+          mb={4}
+          borderRadius="lg"
+          borderWidth="1px"
+        >
           <Tabs variant="soft-rounded" colorScheme="brand">
             <TabList mb="1em">
               <Tab w="50%">Login</Tab>

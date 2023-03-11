@@ -1,4 +1,4 @@
-import { Box, Flex, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import LoadingChats from "./LoadingChats";
 
 function ChatList({ chats, activeChat, handleChangeActiveChat }) {

@@ -36,7 +36,6 @@ function Login() {
     try {
       const response = await login({ username, password });
       localStorage.setItem("authToken", response.data);
-      // Setting the logged user in the context
       await authenticateUser();
       navigate("/account");
     } catch (error) {

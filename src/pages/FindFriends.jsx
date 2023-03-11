@@ -117,13 +117,8 @@ function FindFriends() {
     <>
       <NavBar />
       <FriendsSection
-        loggedUser={loggedUser}
-        allUsers={allUsers}
         filteredUsers={filteredUsers}
-        invitedUsers={invitedUsers}
-        friends={friends}
         selectedParish={selectedParish}
-        filterUsersByParish={filterUsersByParish}
         handleParishChange={handleParishChange}
         checkFriendshipStatus={checkFriendshipStatus}
         handleAddFriend={handleAddFriend}

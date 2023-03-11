@@ -9,13 +9,8 @@ import UserCard from "./UserCard";
 import parishList from "../../utils/parish.json";
 
 function FriendsSection({
-  loggedUser,
-  allUsers,
   filteredUsers,
-  invitedUsers,
-  friends,
   selectedParish,
-  filterUsersByParish,
   handleParishChange,
   checkFriendshipStatus,
   handleAddFriend,

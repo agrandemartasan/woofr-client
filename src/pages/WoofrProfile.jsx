@@ -40,7 +40,6 @@ function WoofrProfile() {
       setLocation(response.data.info.locationByParish);
       setBio(response.data.info.bio);
       setBirthday(response.data.info.birthday);
-      debugger;
       setGender(response.data.info.gender);
       setBreed(response.data.info.breed);
       setIsNeuteredOrSpayed(response.data.info.isNeuteredOrSpayed);
@@ -63,7 +62,7 @@ function WoofrProfile() {
         w="100%"
         minH="91vh"
         gap={4}
-        pt={7}
+        py={7}
         px={5}
         bg={useColorModeValue("brand.100", "brand.850")}
       >
@@ -138,15 +137,30 @@ function WoofrProfile() {
             borderRadius="lg"
             borderWidth="1px"
           >
-            <Tag size="lg" colorScheme={"brand"}>
+            <Tag
+              size={{ base: "md", md: "lg" }}
+              py={2}
+              px={4}
+              colorScheme={"brand"}
+            >
               {isNeuteredOrSpayed
                 ? "I'm neutered/spayed"
                 : "I'm not neutered/spayed"}
             </Tag>
-            <Tag size="lg" colorScheme={"brand"}>
+            <Tag
+              size={{ base: "md", md: "lg" }}
+              py={2}
+              px={4}
+              colorScheme={"brand"}
+            >
               {isVaccinated ? "I'm vaccinated" : "I'm not vaccinated"}
             </Tag>
-            <Tag size="lg" colorScheme={"brand"}>
+            <Tag
+              size={{ base: "md", md: "lg" }}
+              py={2}
+              px={4}
+              colorScheme={"brand"}
+            >
               {isTrained ? "I'm trained" : "I'm not trained"}
             </Tag>
           </HStack>
